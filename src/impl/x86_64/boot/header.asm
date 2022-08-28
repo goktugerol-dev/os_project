@@ -1,0 +1,37 @@
+// ADDING DATA TO BE INCLUDED IN THE OPERATING SYSTEM BINARY
+
+/*  THIS DATA IS NECESSARY SO THE BOOT SYSTEM CAN UNDERSTAND 
+    THAT THERE IS AN OPERATING SYSTEM THAT CAN BE RUN ON COMPUTER.
+*/
+
+/*  OS ISN'T THE FIRST THING THAT STARTS ON THE COMPUTER,
+    BUT RATHER THE BOOTLOADER IS. 
+*/
+
+/*  THE CORE RESPONSABILITY OF A BOOT LOADER IS TO LOCATE AN OPERATING SYSTEM
+    IN WHATEVER WAY IT APPROPIATE TO A SPECIFIC COMPUTER SO WHETHER THAT BE
+    SOMEWHERE ON THE HARD DRIVE, OR ON A USB DRIVE, OR MAYBE ON A CD, AND 
+    ONCE THE BOOTLOADER HAS FOUND ANY OPERATING SYSTEMS, IT WILL BE ABLE TO
+    START THEM.
+*/
+
+; MULTUBOOT 2 SPECIFICATION
+; MOST BOOT LOADERS SUPPORT
+
+section .multiboot_header
+header_start:
+    ; Implementing header data
+    ; magic number
+    dd 0xe85250d6   ; multiboot 2
+    ; architecture
+    dd 0    ; protected mode i386
+    ; header length
+    dd header_end - header_start
+    ; checksum
+    dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))
+
+    ; end tag
+    dw 0 
+    dw 0 
+    dd 8
+header_end:

@@ -1,0 +1,9 @@
+global start
+
+section .text
+bits 32  ; I will switch to 64 bit later.
+start:
+    ; print 'Ok'
+    
+    mov dword [0xb8000], 0x2f4b2f4f ; USING VIDEO MEMORY. THE CPU WILL HOOK THE TEXT STORED AT THIS MEMORY ONTO SCREEN.
+    hlt ; ONCE SUCCESSFULLY PRINTED, INSTRUCTING CPU TO COMPLETELY FREEZE AND NOT RUN ANY FURTHER INSTRUCTIONS.
